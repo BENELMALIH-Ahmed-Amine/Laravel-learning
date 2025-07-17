@@ -1,8 +1,26 @@
 @extends('layouts.index')
 
 @section('content')
-    <h1>Home Content</h1>
-    <div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nostrum nobis culpa voluptatem tempora illum est recusandae nulla quae reprehenderit nam nisi, dolore, eligendi rerum enim delectus consectetur iusto eum?</p>
-    </div>
+<div class="h-10 w-full bg-amber-600"></div>
+    <table>
+        <thead class=" bg-amber-500 ">
+            <h1>Products Table</h1>
+        </thead>
+
+        <tbody class="">
+            <tr>
+                <th>name</th>
+                <th>price</th>
+                <th>description</th>
+            </tr>
+
+            @foreach ($AllProducts as $Product)
+                <tr>
+                    <td>{{ $Product->name }}</td>
+                    <td>{{ $Product->price }}</td>
+                    <td>{{ $Product->description }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection
