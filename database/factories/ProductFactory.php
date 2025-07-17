@@ -17,7 +17,13 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->productName(),
+            'name' => fake()->randomElement([
+                'Wireless Mouse',
+                'Mechanical Keyboard',
+                '4K Monitor',
+                'Bluetooth Headphones',
+                'Smart Watch'
+            ]),
             'price' => fake()->randomFloat(2, 250, 750),
             'description' => fake()->paragraph()
         ];
