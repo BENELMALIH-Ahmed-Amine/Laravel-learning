@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Candidate;
+use App\Models\Todo;
+use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 
-class CandidateController extends Controller
+class TodoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $infos = Candidate::all();
-
-        return view('candidate', compact('infos'));
+        $tasks = Todo::all();
+        return view('todo', compact('tasks'));
     }
 
     /**
@@ -30,13 +30,19 @@ class CandidateController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            "task" => "required|string"
+        ]);
+
+        Todo::create($request->only("task"));
+
+        return back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Candidate $candidate)
+    public function show(Todo $todo)
     {
         //
     }
@@ -44,7 +50,7 @@ class CandidateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Candidate $candidate)
+    public function edit(Todo $todo)
     {
         //
     }
@@ -52,16 +58,23 @@ class CandidateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Candidate $candidate)
+    public function update(Request $request, Todo $todo)
     {
-        //
+        $request->validate([
+            "task" => "required|string"
+        ]);
+
+        $todo::update($request->only("task"));
+
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Candidate $candidate)
+    public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+        return back();
     }
 }

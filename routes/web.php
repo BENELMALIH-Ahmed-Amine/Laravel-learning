@@ -2,12 +2,23 @@
 
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'index'])->name("home");
+Route::get('/home', [HomeController::class, 'index'])->name("home.index");
 
-Route::get('/candidate', [CandidateController::class, 'index'])->name("candidate");
+// candidate
+Route::get('/candidate', [CandidateController::class, 'index'])->name("candidate.index");
+Route::post('/candidate/store', [CandidateController::class, 'store'])->name("candidate.store");
+
+// To-do
+Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
+Route::post('/todo/store', [TodoController::class, 'store'])->name('todo.store');
+
+Route::put('/todo/destroy/{todo}', [TodoController::class, 'update'])->name('todo.update');
+
+Route::delete('/todo/destroy/{todo}', [TodoController::class, 'destroy'])->name('todo.destroy');
