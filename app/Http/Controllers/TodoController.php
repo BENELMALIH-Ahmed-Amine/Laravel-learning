@@ -61,10 +61,10 @@ class TodoController extends Controller
     public function update(Request $request, Todo $todo)
     {
         $request->validate([
-            "task" => "required|string"
+            "newtask" => "required|string"
         ]);
 
-        $todo::update($request->only("task"));
+        $todo::update(["task" => $request->nextask]);
 
         return back();
     }
